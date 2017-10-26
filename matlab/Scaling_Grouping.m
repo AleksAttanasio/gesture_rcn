@@ -1,9 +1,9 @@
-function Data_set=Scaling_Grouping(Data_set)
+function Data_set=Scaling_Grouping(Data_set, setGroup)
        
      % Grouping in sets of SET samples (on paper [6], SET = 50),
      % considering every repetition of the task (ring) 
         
-        SET = 2;
+        SET = setGroup;
         s=1;
         if SET ~= 1
           % Finding every repetition of the task (ring) 
