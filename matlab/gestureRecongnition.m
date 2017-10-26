@@ -5,7 +5,7 @@ close all
 %% Loading dataset, initializing Network and running learning
 
 % loading dataset
-[x,t] = gesture_dataset('dataset_54k_15onehot_noGPU');
+[x,t] = gesture_dataset('dataset_109320_onehot_noGPU');
 
 % initializing network with numbers of neuron
 net = patternnet(120); 
@@ -29,16 +29,21 @@ testIndices = vec2ind(testY);
 
 saveNet
 %% Test manually the network
+load dataset_test.mat % Loading dataset
+load softmaxNet_120x109320_98_0.mat
+
 
 % Manually enter new samples 
-testSet = []; % ++++ CHANGE [] to variables to set +++++
+testSet = knot_tying; % ++++ CHANGE [] to variables to set +++++
 res = net(testSet);
 res = vec2ind(res);
 
 %% Plots and print data
-
+figure
 plotperform(tr) % Plot performance (MSE)
+figure
 plotconfusion(testT,testY) % Plot confusion matrix
+figure
 plotroc(testT,testY) % Plot ROC (receiver operating characteristic)
 
 [c,cm] = confusion(testT,testY);

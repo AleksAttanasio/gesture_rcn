@@ -2,5 +2,5 @@ function [inputs,targets] = gesture_dataset (name)
 %Gesture dataset
 
 load(name)
-inputs = Training_set';
+inputs = training';
 targets = labels';
