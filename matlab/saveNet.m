@@ -14,7 +14,7 @@ while (exist(strcat(name,'.mat')) == 2)
     
     k = k+1; % increment index
     name(end) = []; % remove index
-    name = strcat(name,k) % change index
+    name = strcat(name,num2str(k)) % change index
     
 end
 
