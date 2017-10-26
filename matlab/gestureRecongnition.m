@@ -8,7 +8,7 @@ close all
 [x,t] = gesture_dataset('dataset_109320_onehot_noGPU');
 
 % initializing network with numbers of neuron
-net = patternnet(200);
+net = patternnet(400);
 net.divideParam.trainRatio = 70/100;
 net.divideParam.valRatio = 20/100;
 net.divideParam.testRatio = 10/100;
@@ -31,9 +31,23 @@ testY = net(testX);
 testIndices = vec2ind(testY);
 
 saveNet
+
+%% Plots and print data
+% figure
+% plotperform(tr) % Plot performance (MSE)
+figure
+plotconfusion(testT,testY) % Plot confusion matrix
+% figure
+% plotroc(testT,testY) % Plot ROC (receiver operating characteristic)
+
+[c,cm] = confusion(testT,testY);
+
+fprintf('Percentage Correct Classification   : %f%%\n', 100*(1-c));
+fprintf('Percentage Incorrect Classification : %f%%\n', 100*c);
+
 %% Test manually the network
 load dataset_test.mat % Loading dataset
-load softmaxNet_150x109320_98_1.mat
+load softmaxNet_400x109320_99_0.mat
 
 % Manually enter new samples (knot_tying)
 testSet = knot_tying; % ++++ CHANGE [] to variables to set +++++ dimension are [features x timeStep]
@@ -47,7 +61,7 @@ accuracy = sum(idx(:))/numel(res);
 %%
 % Manually enter new samples (needle_passing)
 load dataset_test.mat % Loading dataset
-load softmaxNet_150x109320_98_1.mat
+load softmaxNet_400x109320_99_0.mat
 
 testSet = needle_passing; % ++++ CHANGE [] to variables to set +++++ dimension are [features x timeStep]
 res = net(testSet);
@@ -57,15 +71,3 @@ err = needle_passingLabels - res;
 idx = err==0;
 accuracy = sum(idx(:))/numel(res);
 
-%% Plots and print data
-figure
-plotperform(tr) % Plot performance (MSE)
-figure
-plotconfusion(testT,testY) % Plot confusion matrix
-figure
-plotroc(testT,testY) % Plot ROC (receiver operating characteristic)
-
-[c,cm] = confusion(testT,testY);
-
-fprintf('Percentage Correct Classification   : %f%%\n', 100*(1-c));
-fprintf('Percentage Incorrect Classification : %f%%\n', 100*c);
