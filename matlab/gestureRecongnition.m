@@ -12,6 +12,7 @@ net = patternnet(400);
 net.divideParam.trainRatio = 70/100;
 net.divideParam.valRatio = 20/100;
 net.divideParam.testRatio = 10/100;
+net.performParam.regularization = 0.4;
 
 % view(net) % ++++++++ uncomment to view network scheme ++++++++
 
