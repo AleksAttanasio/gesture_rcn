@@ -8,7 +8,10 @@ close all
 [x,t] = gesture_dataset('dataset_109320_onehot_noGPU');
 
 % initializing network with numbers of neuron
-net = patternnet(120); 
+net = patternnet(150);
+net.divideParam.trainRatio = 70/100;
+net.divideParam.valRatio = 20/100;
+net.divideParam.testRatio = 10/100;
 
 % view(net) % ++++++++ uncomment to view network scheme ++++++++
 
@@ -34,9 +37,13 @@ load softmaxNet_120x109320_98_0.mat
 
 
 % Manually enter new samples 
-testSet = knot_tying; % ++++ CHANGE [] to variables to set +++++
+testSet = needle_passing; % ++++ CHANGE [] to variables to set +++++ dimension are [features x timeStep]
 res = net(testSet);
 res = vec2ind(res);
+
+err = needle_passingLabels - res;
+idx = err==0;
+accuracy = sum(idx(:))/numel(res);
 
 %% Plots and print data
 figure
