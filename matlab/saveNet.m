@@ -18,5 +18,15 @@ while (exist(strcat(name,'.mat')) == 2)
     
 end
 
+%Check for regulation parameter
+if(net.performParam.regularization ~= 0)
+    
+    % convert regulation parameter to string
+    reg = replace(num2str(net.performParam.regularization),'.','');
+    reg = reg(1:2); % save just significant decimals
+    name = strcat(name,'_reg',reg);
+    
+end
+
 % save network
 save (name, 'net', 'tr')
