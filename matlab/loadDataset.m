@@ -12,12 +12,14 @@ clear all
 Data_withGestures = Loader_Gestures();
 
 % 1.1) Index for Grouping the code will generate numel(k) datasets
-k = [1 2 3 4 5];
+k = [1];
 
 for i = 1:1:numel(k)
     % 2) Features scaling and mean normalization [5] Grouping [6]
     Data_withGestures = Scaling_Grouping(Data_withGestures, k(i));
-
+    [r,~]=find(isnan(Data_withGestures));
+    Data_withGestures(r,:)=[];
+    
     % 3) Removing of the labels
     training=Data_withGestures(:,3:end);
 

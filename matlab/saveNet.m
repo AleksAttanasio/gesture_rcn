@@ -6,7 +6,7 @@ acc = 100*(1-c);
 % declaring index
 k = 0;
 % name format: 'softmaxNet_<netSize>x<trainSamples>_<accuracy>_<netIndex>'
-name = strcat('softmaxNet_',num2str(net.layers{1,1}.size),'x',num2str(size(t,2)),'_',num2str(round(acc)),...
+name = strcat('network_models/softmaxNet_',num2str(net.layers{1,1}.size),'x',num2str(size(t,2)),'_',num2str(round(acc)),...
         '_',num2str(k));
 
 % check for existing file
