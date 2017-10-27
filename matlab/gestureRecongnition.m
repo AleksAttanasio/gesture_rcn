@@ -48,16 +48,16 @@ fprintf('Percentage Incorrect Classification : %f%%\n', 100*c);
 
 %% Test manually the network
 load dataset_test.mat % Loading dataset
-% load softmaxNet_250x109320_79_0_reg06.mat
+load 'network_models/softmaxNet_400x109320_99_0.mat'
 
 % Manually enter new samples (knot_tying)
 testSet = knot_tying; % ++++ CHANGE [] to variables to set +++++ dimension are [features x timeStep]
 res = net(testSet);
-res = vec2ind(res);
+res_i = vec2ind(res);
 
-err = knot_tyingLabels - res;
+err = knot_tyingLabels - res_i;
 idx = err==0;
-accuracy = sum(idx(:))/numel(res);
+accuracy = sum(idx(:))/numel(res_i);
 
 %%
 % Manually enter new samples (needle_passing)
