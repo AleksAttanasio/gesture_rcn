@@ -5,14 +5,14 @@ close all
 %% Loading dataset, initializing Network and running learning
 
 % loading dataset
-[x,t] = gesture_dataset('dataset_109320_onehot_noGPU');
+[x,t] = gesture_dataset('dataset_246783_onehot_noGPU');
 
 % initializing network with numbers of neuron
-net = patternnet(400);
+net = patternnet(350);
 net.divideParam.trainRatio = 70/100;
 net.divideParam.valRatio = 20/100;
 net.divideParam.testRatio = 10/100;
-net.performParam.regularization = 0.4;
+net.performParam.regularization = 0.6;
 
 % view(net) % ++++++++ uncomment to view network scheme ++++++++
 
@@ -48,7 +48,7 @@ fprintf('Percentage Incorrect Classification : %f%%\n', 100*c);
 
 %% Test manually the network
 load dataset_test.mat % Loading dataset
-load softmaxNet_400x109320_99_0.mat
+% load softmaxNet_250x109320_79_0_reg06.mat
 
 % Manually enter new samples (knot_tying)
 testSet = knot_tying; % ++++ CHANGE [] to variables to set +++++ dimension are [features x timeStep]
@@ -62,7 +62,7 @@ accuracy = sum(idx(:))/numel(res);
 %%
 % Manually enter new samples (needle_passing)
 load dataset_test.mat % Loading dataset
-load softmaxNet_400x109320_99_0.mat
+% load softmaxNet_250x109320_79_0_reg06.mat
 
 testSet = needle_passing; % ++++ CHANGE [] to variables to set +++++ dimension are [features x timeStep]
 res = net(testSet);
