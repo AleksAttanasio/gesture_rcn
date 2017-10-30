@@ -9,9 +9,9 @@ load test_auto;
 load results_table;
 
 datasetName = 'dataset_246783_onehot_noGPU';
-neuronsNumber = [10 15 20];
+neuronsNumber = [130 180 230 280 330 380 430 480];
 datasetDivision = [[70/100 20/100 10/100]; [80/100 15/100 5/100]];
-regValues = [0.1 0.2];
+regValues = [0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9];
 
 
 for neuronIndex = 1:numel(neuronsNumber)
@@ -28,7 +28,9 @@ for neuronIndex = 1:numel(neuronsNumber)
             net.performParam.regularization = regValues(regIndex);
 
             % view(net) % ++++++++ uncomment to view network scheme ++++++++
-
+            
+            
+            
             % training network
             [net,tr] = train(net,x,t); 
             nntraintool
@@ -65,7 +67,7 @@ for neuronIndex = 1:numel(neuronsNumber)
             
             newDataRow = {name, neuronsNumber(neuronIndex), size(t,2), ...
                             regValues(regIndex), datasetDivision(dataDivIndex, :), ...
-                            netAccuracy, performance, testAccuracy}
+                            netAccuracy, performance, testAccuracy, mean(testAccuracy)};
             resTable = [resTable; newDataRow];
             
             save('results_table.mat','resTable');
