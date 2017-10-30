@@ -29,7 +29,7 @@ for neuronIndex = 1:numel(neuronsNumber)
 
             % view(net) % ++++++++ uncomment to view network scheme ++++++++
             
-            
+            printCurrentNetwork;
             
             % training network
             [net,tr] = train(net,x,t); 
