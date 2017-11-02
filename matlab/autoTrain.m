@@ -7,11 +7,12 @@ close all
 
 load test_auto;
 load results_table;
+% dev = gpuDevice(1); 
 
 datasetName = 'dataset_246783_onehot_noGPU';
-neuronsNumber = [230 280 330 380 430 480 530 580 650];
-datasetDivision = [[70/100 20/100 10/100]; [80/100 15/100 5/100]];
-regValues = [0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9];
+neuronsNumber = [280 330 380 430 480 530 580 650];
+datasetDivision = [[70/100 20/100 10/100]];
+regValues = [0 0.2 0.4 0.6 0.8];
 
 
 for neuronIndex = 1:numel(neuronsNumber)
@@ -26,6 +27,7 @@ for neuronIndex = 1:numel(neuronsNumber)
             net.divideParam.valRatio = datasetDivision(dataDivIndex, 2);
             net.divideParam.testRatio = datasetDivision(dataDivIndex, 3);
             net.performParam.regularization = regValues(regIndex);
+%             net.output.processFcns = {'mapminmax'};
 
             % view(net) % ++++++++ uncomment to view network scheme ++++++++
             
